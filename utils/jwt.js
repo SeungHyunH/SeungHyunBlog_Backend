@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (token) => {
     try {
-        const decoded = jwt.verify(token, "PASSWORD")
+        const decoded = jwt.verify(token, "PASSWORD");
         return decoded;
     } catch (error) {
         // TokenExpiredError
@@ -15,7 +15,7 @@ const verifyToken = (token) => {
         // jwt형식이 아닌경우  
  
         if(error.name === 'TokenExpiredError'){
-            
+            //console.log(error);
         }
         if(error.name === 'JsonWebTokenError'){
             console.log(error);
@@ -24,8 +24,7 @@ const verifyToken = (token) => {
             console.log(error);
         }
 
-        console.log(err)
-        return false
+        return false;
     }   
 }
 
@@ -37,10 +36,10 @@ const makeAccessToken = (id) => {
         return jwt.sign({
             id
         }, "PASSWORD", {
-            expiresIn: '2h'
+            expiresIn: '10s'
         })
     } catch (error) {
-        
+        return "error";
     }
 }
 
@@ -56,7 +55,7 @@ const makeRefreshToken = (id) => {
         
     } catch (error) {
         //  로그 남기기
-        return "error"
+        return "error";
     }
 }
 

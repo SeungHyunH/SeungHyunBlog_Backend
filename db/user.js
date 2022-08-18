@@ -1,4 +1,4 @@
-const db = require('../../models');
+const db = require('../models');
 
 const isExistSnsId = async(type, sns_id) => {
     try {
