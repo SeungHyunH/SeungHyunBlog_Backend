@@ -23,7 +23,7 @@ USE `blog_db` ;
 -- Table `blog_db`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog_db`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   `picture` VARCHAR(255) NULL,
   `email` VARCHAR(255) NULL,
@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- Table `blog_db`.`social_logins`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog_db`.`social_logins` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(255) NULL,
   `sns_id` VARCHAR(255) NULL,
   `created_at` DATETIME NOT NULL,
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 -- Table `blog_db`.`post`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog_db`.`post` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `mainText` VARCHAR(10000) NULL,
   `title` VARCHAR(255) NULL,
   `url` VARCHAR(255) NULL,
@@ -71,7 +71,7 @@ ENGINE = InnoDB;
 -- Table `blog_db`.`comment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog_db`.`comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
   `comment` VARCHAR(255) NULL,
