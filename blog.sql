@@ -16,7 +16,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema blog_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `blog_db` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `blog_db` DEFAULT CHARACTER SET utf8mb4 ;
 USE `blog_db` ;
 
 -- -----------------------------------------------------
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `blog_db`.`post` (
   `title` VARCHAR(255) NULL,
   `url` VARCHAR(255) NULL,
   `menu` VARCHAR(255) NULL,
-  `create_at` DATETIME NULL,
-  `update_at` DATETIME NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `blog_db`.`comment` (
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
   `comment` VARCHAR(255) NULL,
-  `create_at` DATETIME NULL,
-  `update_at` DATETIME NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
   INDEX `post_id_idx` (`post_id` ASC) VISIBLE,

@@ -28,15 +28,12 @@ const snsSignUp = async({email,nickname, sns_id,picture,type }) => {
     }
     if(email&&nickname){
       const userQuery = `insert into user(id,name,picture,email,user_type) values(null,'${nickname}','${picture}','${email}','${type}')`;
-      pool.query(userQuery,(err,result,fileds)=>{
-        if(err) throw err;
-        const snsUserQuery = `insert into social_logins(id,type,sns_id,created_at,updated_at,user_id) values (null,'${type}','${sns_id}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,${result.insertId})`;
-        pool.query(snsUserQuery,(err,res,fileds)=>{
-          if(err) throw err;
-          return result.insertId;
-        });
-      });
-      return false;
+      let [rows,fields,err] = await pool.query(userQuery);
+      if(err) throw err;
+      const snsUserQuery = `insert into social_logins(id,type,sns_id,created_at,updated_at,user_id) values (null,'${type}','${sns_id}',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,${rows.insertId})`;
+      let [rows2,field2,err2] = await pool.query(snsUserQuery);
+      if(err2) throw err2;
+      return rows2.insertId;
     }
   }catch(error){
     console.log(error);

@@ -20,15 +20,12 @@ router.post("/auth/client-refresh", (req, res, next) =>{
     // refresh Token 갱신 
     const accessToken = makeAccessToken(verifyAccessToken.id);
     const refreshToken = makeRefreshToken(verifyAccessToken.id);
-
+    
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true
     });
-
     return res.json({accessToken})
-    
   }
-  
   return res.json({error : true})
 });
 
@@ -64,8 +61,9 @@ router.get("/auth/google/callback", async(req, res, next) => {
       picture : picture,
       type:'master',
     };
+    
     const user_id = await isExistSnsId(userInformation.sns_id);
-
+    
     // id가 있는경우 가입이 된 상태이기 떄문에 로그인 로직으로 넘긴다
     if(user_id){
       const accessToken = makeAccessToken(user_id);
@@ -88,14 +86,13 @@ router.get("/auth/google/callback", async(req, res, next) => {
 
 router.get("/auth/get-userinfo",async(req,res,next)=>{
   const requestToken = req.headers.authorization.split(' ')[1];
-
+  
   const result = verifyToken(requestToken);
   if(result === 'TokenExpiredError'){
   }else if(result === 'JsonWebTokenError' | result === 'NotBeforeError'){
     res.status(402);
   }else{
     const temp = await getUserInfo(result.id);
-
     return res.json(temp);
   }
 });
