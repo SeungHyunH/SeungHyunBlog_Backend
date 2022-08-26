@@ -3,7 +3,7 @@ const router = express.Router();
 const dotenv = require('dotenv');
 const axios = require('axios')
 const {verifyToken} = require('../../util/jwt');
-const { setPost,getPost } = require('../../db/post');
+const { setPost,getPost,getPostList } = require('../../db/post');
 dotenv.config();
 
 router.post("/write",async(req,res,next)=>{
@@ -21,6 +21,12 @@ router.post("/write",async(req,res,next)=>{
 
 router.get("/read",async(req,res,next)=>{
   const result = await getPost(req.query.postId);
+  if(!result){return res.json({error:true});}
+  return res.json(result);
+});
+
+router.get("/read-list",async(req,res,next)=>{
+  const result = await getPostList(req.query.menu,req.query.page);
   if(!result){return res.json({error:true});}
   return res.json(result);
 });

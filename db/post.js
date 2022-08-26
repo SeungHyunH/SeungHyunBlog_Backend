@@ -20,4 +20,20 @@ const getPost = async function(postId){
   }
 }
 
-module.exports ={setPost,getPost}
+const getPostList = async function(menu,page){
+  try {
+    if(menu === 'all'){
+      const [rows,fields] = await pool.query(`SELECT * FROM post ORDER BY id DESC LIMIT ${page*10}, 10`);
+      if(rows.length === 0){return false;}
+      return rows;
+    }else{
+      const [rows,fields] = await pool.query(`SELECT * FROM post WHERE menu = '${menu}' ORDER BY id DESC LIMIT ${page*10}, 10`);
+      if(rows.length === 0){return false;}
+      return rows;
+    }
+  } catch (error) {
+    return false; 
+  }
+}
+
+module.exports ={setPost,getPost,getPostList}
