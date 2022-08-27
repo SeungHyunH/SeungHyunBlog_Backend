@@ -81,11 +81,12 @@ router.get("/auth/google/callback", async(req, res, next) => {
   }catch (error){
     console.log(error);
   }
-  return res.redirect("http://localhost:3000")
+  return res.redirect("http://localhost:3000/redirect")
 })
 
 router.get("/auth/get-userinfo",async(req,res,next)=>{
   const requestToken = req.headers.authorization.split(' ')[1];
+  console.log(requestToken)
   
   const result = verifyToken(requestToken);
   if(result === 'TokenExpiredError'){
