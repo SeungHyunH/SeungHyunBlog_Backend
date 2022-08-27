@@ -81,7 +81,7 @@ router.get("/auth/google/callback", async(req, res, next) => {
   }catch (error){
     console.log(error);
   }
-  return res.redirect("http://localhost:3000/login")
+  return res.redirect("http://localhost:3000")
 })
 
 router.get("/auth/get-userinfo",async(req,res,next)=>{
