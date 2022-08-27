@@ -59,7 +59,7 @@ router.get("/auth/google/callback", async(req, res, next) => {
       nickname:name,
       sns_id : sub,
       picture : picture,
-      type:'master',
+      type:'guest',
     };
     
     const user_id = await isExistSnsId(userInformation.sns_id);
