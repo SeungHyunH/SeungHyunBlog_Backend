@@ -23,11 +23,11 @@ const getPost = async function(postId){
 const getPostList = async function(menu,page){
   try {
     if(menu === 'all'){
-      const [rows,fields] = await pool.query(`SELECT * FROM post ORDER BY id DESC LIMIT ${page*10}, 10`);
+      const [rows,fields] = await pool.query(`SELECT * FROM post ORDER BY id DESC LIMIT ${page}, 10`);
       if(rows.length === 0){return false;}
       return rows;
     }else{
-      const [rows,fields] = await pool.query(`SELECT * FROM post WHERE menu = '${menu}' ORDER BY id DESC LIMIT ${page*10}, 10`);
+      const [rows,fields] = await pool.query(`SELECT * FROM post WHERE menu = '${menu}' ORDER BY id DESC LIMIT ${page}, 10`);
       if(rows.length === 0){return false;}
       return rows;
     }
@@ -36,4 +36,18 @@ const getPostList = async function(menu,page){
   }
 }
 
-module.exports ={setPost,getPost,getPostList}
+const getCount = async function(menu){
+  try {
+    if(menu === 'all'){
+      const [rows,fields] = await pool.query(`SELECT COUNT(*) FROM post`);
+      return rows;
+    }else{
+      const [rows,fields] = await pool.query(`SELECT COUNT(*) FROM post WHERE menu = '${menu}'`);
+      return rows;
+    }
+  } catch (error) {
+    return false; 
+  }
+}
+
+module.exports ={setPost,getPost,getPostList,getCount}
